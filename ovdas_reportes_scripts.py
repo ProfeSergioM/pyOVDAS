@@ -1,6 +1,6 @@
 import datetime as dt
 
-def gen_REAV(fechas=[dt.datetime.strftime(dt.datetime.utcnow() - dt.timedelta(hours=24), '%Y-%m-%dT%H:%M'),dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M")],ML=1.5,ms=2,anchomap=40):
+def gen_REAV(fechas=[dt.datetime.strftime(dt.datetime.utcnow() - dt.timedelta(hours=24), '%Y-%m-%d %H:%M'),dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")],ML=">1.5",ms=2,anchomap=40):
     """Genera un REAV semiautomático (guardado en el directorio de trabajo), basándose en la búsqueda de eventos del último día LOCALIZADOS
     
     :param fechas: Par [fecha inicial,fecha final], por defecto busca en las últimas 24 horas
@@ -35,13 +35,18 @@ def gen_REAV(fechas=[dt.datetime.strftime(dt.datetime.utcnow() - dt.timedelta(ho
     import ovdas_doc_lib as doc
     import ovdas_formulas_lib as formu
     import pandas as pd
-    a = gdb.get_evloc(fechas=fechas,ML=ML)
+    a = gdb.extraer_eventos(inicio=fechas[0],final=fechas[1],ML=ML,volcan='*')
+
+    volcanes_data = gdb.volc_metadata(volc='all')
     #permitir seleccionar uno
     i=0
+    a = pd.DataFrame(a)
     a.reset_index()
+    print(a)
     for index,row in a.iterrows():
-        print(str(i)+" - "+row['nombrevolcan']+" - "+str(row['ev_tipoev'])+" - "+str(row['ev_fecha'])+" - ML="+str(row['ev_ml']))
+        print(str(i)+" - "+volcanes_data[volcanes_data.id==row.idvolc].nombre_db.iloc[0])
         i=i+1
+    '''
     sel = input('Seleccione el evento: ')  
     a = (a[a.index==int(sel)])
     stadata = gdb.esta_metadata(a.iloc[0]['nombredb'],tipo='net')
@@ -59,6 +64,7 @@ def gen_REAV(fechas=[dt.datetime.strftime(dt.datetime.utcnow() - dt.timedelta(ho
     DR=formu.DRc(amp,freq,dist)
 	#generar reporte
     doc.REAV(a,pathmap,DR)
+    '''
 
 def gen_mapa(fechas,vol,anch=80,ms=2,tiev="all"):
     """Genera un mapa de localizaciones
