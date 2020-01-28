@@ -5,5 +5,5 @@ setup(name='pyOvdas',
       author_email="sergio.morales@sernageomin.cl",
       license="GPL-3.0",
       url="https://github.com/ProfeSergioM/pyOvdas_lib",
-      py_modules=['ovdas_getfromdb_lib'],
+      py_modules=['ovdas_getfromdb_lib','ovdas_reportes_scripts'],
 )
