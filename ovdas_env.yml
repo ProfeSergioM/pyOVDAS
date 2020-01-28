@@ -1,0 +1,5 @@
+name: ovdas_env_test
+dependencies:
+   - pip
+   - pip:
+     - --no-cache-dir --upgrade https://github.com/ProfeSergioM/pyOvdas/archive/master.zip
