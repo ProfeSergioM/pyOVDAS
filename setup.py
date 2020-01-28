@@ -1,5 +1,5 @@
 from distutils.core import setup
-setup(name='pyOvdas_lib',
+setup(name='pyOvdas',
       version='1.0',
       author="Automatizacion Ovdas",
       author_email="sergio.morales@sernageomin.cl",
