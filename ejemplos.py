@@ -5,8 +5,5 @@ Created on Wed Dec 18 13:32:39 2019
 @author: sergio
 """
 
-repo.gen_REAV()
-
-
-
+from packyou.github.ProfeSergioM.pyOvdas_lib import *
 
