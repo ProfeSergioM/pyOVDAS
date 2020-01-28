@@ -9,5 +9,6 @@ setup(name='pyOvdas',
                   'ovdas_formulas_lib'],
       install_requires=[
           'simplekml',
+          'spyder',
       ],
 )
